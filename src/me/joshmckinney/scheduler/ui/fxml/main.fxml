@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="300.0" minWidth="300.0" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.251" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.joshmckinney.scheduler.ui.Main">
+   <children>
+      <MenuBar prefHeight="30.0" prefWidth="600.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Menu">
+            <items>
+                  <Menu mnemonicParsing="false" text="Run Report..">
+                     <items>
+                        <MenuItem fx:id="mClickReportMonthly" mnemonicParsing="false" onAction="#mClickReportMonthlyType" text="Monthly Appt. Type Count" />
+                        <MenuItem fx:id="mClickReportCons" mnemonicParsing="false" onAction="#mClickReportByCons" text="Schedule by Consultant" />
+                        <MenuItem fx:id="mClickReportWeekly" mnemonicParsing="false" onAction="#mClickReportWeekly" text="Weekly Appt. Count" />
+                     </items>
+                  </Menu>
+                  <MenuItem fx:id="mClickAbout" mnemonicParsing="false" onAction="#mClickAbout" text="About" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem id="exitButton" fx:id="mClickExit" mnemonicParsing="false" onAction="#mClickExit" text="Exit" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="New">
+            <items>
+              <MenuItem fx:id="apptNew" disable="true" mnemonicParsing="false" onAction="#newApptAction" text="Appointment" />
+                  <MenuItem fx:id="custNew" mnemonicParsing="false" onAction="#newCustAction" text="Customer" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+               <items>
+                  <MenuItem fx:id="mClickModify" mnemonicParsing="false" onAction="#editAction" text="Modify Selected" />
+                  <MenuItem fx:id="mClickDelete" mnemonicParsing="false" onAction="#deleteAction" text="Delete Selected" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="View">
+               <items>
+                  <Menu mnemonicParsing="false" text="Calendar">
+                    <items>
+                        <RadioMenuItem fx:id="mClickViewDaily" mnemonicParsing="false" onAction="#mClickViewDaily" text="Daily">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="view" />
+                           </toggleGroup>
+                        </RadioMenuItem>
+                        <RadioMenuItem fx:id="mClickViewWeekly" mnemonicParsing="false" onAction="#mClickViewWeekly" text="Weekly" toggleGroup="$view" />
+                        <RadioMenuItem fx:id="mClickViewMonthly" mnemonicParsing="false" onAction="#mClickViewMonthly" text="Monthly" toggleGroup="$view" />
+                        <RadioMenuItem fx:id="mClickViewAll" mnemonicParsing="false" onAction="#mClickViewAll" selected="true" text="All" toggleGroup="$view" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Customer">
+                    <items>
+                        <RadioMenuItem fx:id="mClickViewActive" mnemonicParsing="false" onAction="#mClickViewActive" selected="true" text="Active">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="isActive" />
+                           </toggleGroup></RadioMenuItem>
+                        <RadioMenuItem fx:id="mClickViewInactive" mnemonicParsing="false" onAction="#mClickViewInactive" text="Inactive" toggleGroup="$isActive" />
+                    </items>
+                  </Menu>
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane layoutY="31.0" prefHeight="569.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="apptTab" onSelectionChanged="#apptTabClick" text="Appointments (All)">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="TOP_RIGHT" prefHeight="540.0" prefWidth="600.0">
+                           <children>
+                              <TableView fx:id="apptTable" prefHeight="510.0" prefWidth="600.0">
+                                <columns>
+                                    <TableColumn fx:id="colConsultant" prefWidth="100.0" text="Consultant" />
+                                  <TableColumn fx:id="colCustomer" prefWidth="100.0" text="Customer" />
+                                  <TableColumn fx:id="colType" prefWidth="100.0" text="Type" />
+                                    <TableColumn fx:id="colDate" prefWidth="100.0" text="Date" />
+                                    <TableColumn fx:id="colStartTime" prefWidth="100.0" text="Start" />
+                                    <TableColumn fx:id="colEndTime" prefWidth="100.0" text="End" />
+                                </columns>
+                              </TableView>
+                              <StackPane prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="tfApptSearch" maxWidth="200.0" onKeyReleased="#searchAppt" prefHeight="30.0" promptText="Search Appointments" StackPane.alignment="CENTER_RIGHT">
+                                       <StackPane.margin>
+                                          <Insets right="5.0" />
+                                       </StackPane.margin>
+                                    </TextField>
+                                    <Button fx:id="searchApptClearButton" mnemonicParsing="false" onAction="#searchClearAppt" text="X" visible="false" StackPane.alignment="CENTER_RIGHT">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                       <StackPane.margin>
+                                          <Insets right="5.0" />
+                                       </StackPane.margin>
+                                    </Button>
+                                 </children>
+                              </StackPane>
+                           </children>
+                           <opaqueInsets>
+                              <Insets bottom="5.0" />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="custTab" onSelectionChanged="#custTabClick" text="Customers (Active)">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="TOP_RIGHT" prefHeight="540.0" prefWidth="600.0">
+                           <children>
+                              <TableView fx:id="custTable" prefHeight="510.0" prefWidth="600.0">
+                                 <columns>
+                                    <TableColumn fx:id="colCustName" minWidth="100.0" prefWidth="200.0" text="Name" />
+                                    <TableColumn fx:id="colCustAddress" minWidth="100.0" prefWidth="200.0" text="Address" />
+                                    <TableColumn fx:id="colCustPhone" minWidth="100.0" prefWidth="200.0" text="Phone" />
+                                 </columns>
+                              </TableView>
+                              <StackPane prefHeight="50.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="tfCustSearch" maxWidth="200.0" onKeyReleased="#searchCust" prefHeight="30.0" promptText="Search Customers" StackPane.alignment="CENTER_RIGHT">
+                                       <StackPane.margin>
+                                          <Insets right="5.0" />
+                                       </StackPane.margin></TextField>
+                                    <Button fx:id="searchCustClearButton" mnemonicParsing="false" onAction="#searchClearCust" prefHeight="20.0" text="X" visible="false" StackPane.alignment="CENTER_RIGHT">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                       <StackPane.margin>
+                                          <Insets right="5.0" />
+                                       </StackPane.margin>
+                                    </Button>
+                                 </children>
+                              </StackPane>
+                           </children>
+                           <opaqueInsets>
+                              <Insets bottom="5.0" />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

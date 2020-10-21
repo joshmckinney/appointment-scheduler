@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.251" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.joshmckinney.scheduler.ui.Report">
+    <TableView fx:id="reportTable" prefHeight="600.0" prefWidth="600.0">
+        <columns>
+            <TableColumn fx:id="colConsultant" prefWidth="100.0" text="Consultant" />
+            <TableColumn fx:id="colCustomer" prefWidth="100.0" text="Customer" />
+            <TableColumn fx:id="colType" prefWidth="100.0" text="Type" />
+            <TableColumn fx:id="colDate" prefWidth="100.0" text="Date" />
+            <TableColumn fx:id="colStartTime" prefWidth="100.0" text="Start" />
+            <TableColumn fx:id="colEndTime" prefWidth="100.0" text="End" />
+        </columns>
+    </TableView>
+
+</AnchorPane>
